@@ -18,48 +18,26 @@ The website currently uses emoji placeholders. To add actual photos:
 
 ### 1. Add Photo Files
 Place Sagrika's photos in `src/assets/images/`:
-- `naina-1.jpg` - For quotes section
-- `naina-proposal.jpg` - For the proposal popup
-- `naina-celebration.jpg` - For the celebration card
+- `naina-1.jpeg` - For quote 1 (quotes section)
+- `naina-2.jpeg` - For quote 2 (quotes section)
+- `naina-3.jpeg` - For quote 3 (quotes section)
+- `naina-4.jpeg` - For quote 4 (quotes section)
+- `naina-5.jpeg` - For quote 5 (quotes section)
+- `naina-proposal.jpeg` - For the proposal popup
+- `naina-celebration.jpeg` - For the celebration card
 
-### 2. Update QuotesSection.jsx
-Replace the emoji placeholder with her image:
+### 2. Image Implementation (Already Done!)
+The images are automatically loaded in each component:
 
-```jsx
-// At the top of the file
-import nainaPhoto from '../assets/images/naina-1.jpg'
+- **QuotesSection.jsx**: Shows a different image for each quote (naina-1 through naina-5)
+- **ProposalPopup.jsx**: Shows naina-proposal.jpeg
+- **CelebrationCard.jsx**: Shows naina-celebration.jpeg
 
-// Replace the emoji div with:
-<img
-  src={nainaPhoto}
-  alt="My love Naina"
-  className="w-full h-full rounded-full object-cover"
-/>
-```
-
-### 3. Update ProposalPopup.jsx
-```jsx
-import nainaProposal from '../assets/images/naina-proposal.jpg'
-
-// Replace emoji with:
-<img
-  src={nainaProposal}
-  alt="My beautiful Sagrika"
-  className="w-full h-full rounded-full object-cover"
-/>
-```
-
-### 4. Update CelebrationCard.jsx
-```jsx
-import nainaCelebration from '../assets/images/naina-celebration.jpg'
-
-// Replace emoji with:
-<img
-  src={nainaCelebration}
-  alt="Together forever"
-  className="w-full h-full rounded-full object-cover"
-/>
-```
+All images have beautiful animations including:
+- Glowing borders with pulsing effects
+- Orbiting heart emojis
+- Sparkle effects
+- Smooth transitions between images
 
 ---
 

@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
+import nainaCelebration from '../assets/images/naina-celebration.jpeg'
 
 const CelebrationCard = () => {
   const [confetti, setConfetti] = useState([])
@@ -98,56 +99,78 @@ const CelebrationCard = () => {
           <span className="text-4xl md:text-5xl">🎉💖🎉</span>
         </motion.div>
 
-        {/* Photo - smaller */}
+        {/* Photo - celebration style */}
         <motion.div
           className="mb-4 flex justify-center"
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5 }}
+          initial={{ y: -30, opacity: 0, scale: 0.5 }}
+          animate={{ y: 0, opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
         >
           <div className="relative">
+            {/* Golden glow ring */}
             <motion.div
-              className="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden photo-glow border-3 border-yellow-400 p-1 bg-linear-to-br from-yellow-400 via-pink-500 to-red-500"
+              className="absolute -inset-3 rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-yellow-400 blur-lg opacity-60"
+              animate={{
+                opacity: [0.4, 0.8, 0.4],
+                scale: [1, 1.1, 1],
+                rotate: [0, 180, 360]
+              }}
+              transition={{ duration: 4, repeat: Infinity }}
+            />
+
+            <motion.div
+              className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-yellow-400 p-1 bg-gradient-to-br from-yellow-400 via-pink-500 to-red-500"
               animate={{
                 boxShadow: [
-                  "0 0 15px rgba(255, 215, 0, 0.5)",
-                  "0 0 30px rgba(255, 215, 0, 0.8)",
-                  "0 0 15px rgba(255, 215, 0, 0.5)"
+                  "0 0 20px rgba(255, 215, 0, 0.5)",
+                  "0 0 50px rgba(255, 215, 0, 0.9)",
+                  "0 0 20px rgba(255, 215, 0, 0.5)"
                 ]
               }}
               transition={{ duration: 1.5, repeat: Infinity }}
-              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileHover={{ scale: 1.15, rotate: 10 }}
             >
-              <div className="w-full h-full rounded-full bg-linear-to-br from-pink-200 to-red-200 flex items-center justify-center">
-                <motion.span
-                  className="text-4xl md:text-5xl"
-                  animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.1, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  👩‍❤️‍👨
-                </motion.span>
-              </div>
+              <motion.img
+                src={nainaCelebration}
+                alt="Together forever"
+                className="w-full h-full rounded-full object-cover"
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
             </motion.div>
 
-            {/* Orbiting hearts */}
-            {[...Array(6)].map((_, i) => (
+            {/* Orbiting hearts with celebratory animation */}
+            {[...Array(8)].map((_, i) => (
               <motion.span
                 key={i}
                 className="absolute text-lg md:text-xl"
                 style={{
-                  top: `${50 + 52 * Math.sin((i * Math.PI * 2) / 6)}%`,
-                  left: `${50 + 52 * Math.cos((i * Math.PI * 2) / 6)}%`,
+                  top: `${50 + 58 * Math.sin((i * Math.PI * 2) / 8)}%`,
+                  left: `${50 + 58 * Math.cos((i * Math.PI * 2) / 8)}%`,
                   transform: 'translate(-50%, -50%)'
                 }}
                 animate={{
-                  scale: [1, 1.3, 1],
-                  opacity: [0.7, 1, 0.7]
+                  scale: [1, 1.4, 1],
+                  opacity: [0.6, 1, 0.6],
+                  rotate: [0, 20, -20, 0]
                 }}
-                transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.1 }}
+                transition={{ duration: 1, repeat: Infinity, delay: i * 0.1 }}
               >
-                {['💖', '💕', '❤️', '💗', '💝', '💘'][i]}
+                {['💖', '✨', '💕', '🌟', '❤️', '💫', '💗', '⭐'][i]}
               </motion.span>
             ))}
+
+            {/* Crown effect on top */}
+            <motion.span
+              className="absolute -top-4 left-1/2 transform -translate-x-1/2 text-3xl"
+              animate={{
+                y: [-2, -8, -2],
+                scale: [1, 1.2, 1]
+              }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              👑
+            </motion.span>
           </div>
         </motion.div>
 

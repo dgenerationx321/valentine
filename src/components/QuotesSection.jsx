@@ -1,6 +1,15 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
+// Import images for each quote
+import naina1 from '../assets/images/naina-1.jpeg'
+import naina2 from '../assets/images/naina-2.jpeg'
+import naina3 from '../assets/images/naina-3.jpeg'
+import naina4 from '../assets/images/naina-4.jpeg'
+import naina5 from '../assets/images/naina-5.jpeg'
+
+const quoteImages = [naina1, naina2, naina3, naina4, naina5]
+
 const quotes = [
   {
     text: "My dearest Naina, every moment with you feels like a beautiful dream I never want to wake up from.",
@@ -69,32 +78,49 @@ const QuotesSection = ({ onComplete }) => {
           exit={{ opacity: 0, x: -100, scale: 0.8 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
-          {/* Photo Frame - Interactive */}
+          {/* Photo Frame - Interactive with per-quote images */}
           <motion.div
             className="mb-6 flex justify-center"
-            initial={{ rotateY: 90 }}
-            animate={{ rotateY: 0 }}
+            initial={{ rotateY: 90, scale: 0.8 }}
+            animate={{ rotateY: 0, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <motion.div
               className="relative"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.08 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <div className="w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden photo-glow border-4 border-pink-400 p-1 bg-linear-to-br from-pink-400 via-red-500 to-pink-600">
-                <div className="w-full h-full rounded-full bg-linear-to-br from-red-200 to-pink-200 flex items-center justify-center">
-                  <motion.span
-                    className="text-5xl md:text-6xl"
-                    animate={{
-                      scale: [1, 1.1, 1],
-                      rotate: [0, 5, -5, 0]
-                    }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    💕
-                  </motion.span>
-                </div>
-              </div>
+              {/* Outer glow ring */}
+              <motion.div
+                className="absolute -inset-2 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-pink-500 blur-md opacity-60"
+                animate={{
+                  opacity: [0.4, 0.7, 0.4],
+                  scale: [1, 1.05, 1]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+
+              {/* Photo container */}
+              <motion.div
+                className="relative w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-pink-400 p-1 bg-gradient-to-br from-pink-400 via-red-500 to-pink-600"
+                animate={{
+                  boxShadow: [
+                    "0 0 20px rgba(255, 100, 150, 0.5)",
+                    "0 0 40px rgba(255, 100, 150, 0.8)",
+                    "0 0 20px rgba(255, 100, 150, 0.5)"
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <motion.img
+                  src={quoteImages[currentIndex]}
+                  alt="My love Naina"
+                  className="w-full h-full rounded-full object-cover"
+                  initial={{ scale: 1.2, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                />
+              </motion.div>
 
               {/* Decorative hearts around photo */}
               {[...Array(6)].map((_, i) => (
@@ -102,21 +128,45 @@ const QuotesSection = ({ onComplete }) => {
                   key={i}
                   className="absolute text-xl md:text-2xl"
                   style={{
-                    top: `${50 + 48 * Math.sin((i * Math.PI * 2) / 6)}%`,
-                    left: `${50 + 48 * Math.cos((i * Math.PI * 2) / 6)}%`,
+                    top: `${50 + 52 * Math.sin((i * Math.PI * 2) / 6)}%`,
+                    left: `${50 + 52 * Math.cos((i * Math.PI * 2) / 6)}%`,
                     transform: 'translate(-50%, -50%)'
                   }}
                   animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.6, 1, 0.6]
+                    scale: [1, 1.4, 1],
+                    opacity: [0.5, 1, 0.5],
+                    rotate: [0, 10, -10, 0]
                   }}
                   transition={{
                     duration: 1.5,
                     repeat: Infinity,
-                    delay: i * 0.2
+                    delay: i * 0.15
                   }}
                 >
-                  ❤️
+                  {['❤️', '💖', '💕', '💗', '💝', '💘'][i]}
+                </motion.div>
+              ))}
+
+              {/* Sparkle effects */}
+              {[...Array(4)].map((_, i) => (
+                <motion.div
+                  key={`sparkle-${i}`}
+                  className="absolute text-lg"
+                  style={{
+                    top: `${20 + i * 20}%`,
+                    left: i % 2 === 0 ? '-15%' : '95%',
+                  }}
+                  animate={{
+                    scale: [0, 1, 0],
+                    opacity: [0, 1, 0],
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    delay: i * 0.4
+                  }}
+                >
+                  ✨
                 </motion.div>
               ))}
             </motion.div>
